@@ -13,16 +13,20 @@
         }
 
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a24;
+            --bg-primary: #05050b;
+            --bg-secondary: #101019;
+            --bg-card: #161625;
+            --bg-elevated: #1d1d2f;
             --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --accent-cyan: #48dbfb;
             --accent-purple: #a855f7;
             --accent-pink: #f472b6;
-            --text-primary: #ffffff;
+            --accent-green: #34d399;
+            --text-primary: #f9fafb;
             --text-secondary: #9ca3af;
-            --border-color: rgba(255,255,255,0.1);
+            --border-color: rgba(255,255,255,0.08);
+            --border-strong: rgba(255,255,255,0.18);
+            --shadow-soft: 0 10px 40px rgba(15, 23, 42, 0.35);
         }
 
         body {
@@ -33,13 +37,12 @@
             overflow-x: hidden;
         }
 
+        a { color: inherit; }
+
         /* Animated background */
         .bg-animation {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: -1;
             overflow: hidden;
         }
@@ -51,87 +54,87 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(72, 219, 251, 0.05) 0%, transparent 50%);
-            animation: bgPulse 15s ease-in-out infinite;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(102, 126, 234, 0.25) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(72, 219, 251, 0.12) 0%, transparent 50%);
+            animation: bgPulse 18s ease-in-out infinite;
         }
 
         @keyframes bgPulse {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(2%, 2%) rotate(1deg); }
-            66% { transform: translate(-2%, -2%) rotate(-1deg); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(2%, 1%) scale(1.02); }
+            66% { transform: translate(-1%, -2%) scale(1.03); }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 24px 20px 80px;
         }
 
-        /* Header */
         header {
             text-align: center;
-            padding: 40px 0;
+            padding: 60px 0 30px;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: clamp(2.4rem, 4vw, 3.1rem);
             font-weight: 700;
+            letter-spacing: 0.02em;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         header p {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
-        /* Navigation Tabs */
         .tabs {
             display: flex;
             justify-content: center;
-            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin: 40px 0;
         }
 
         .tab-btn {
-            padding: 12px 24px;
+            padding: 12px 22px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             color: var(--text-secondary);
             cursor: pointer;
             font-size: 0.95rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            letter-spacing: 0.01em;
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            box-shadow: inset 0 0 0 rgba(102, 126, 234, 0);
         }
 
         .tab-btn:hover {
-            background: rgba(102, 126, 234, 0.1);
-            border-color: rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.4);
+            color: #e5e7eb;
             transform: translateY(-2px);
         }
 
         .tab-btn.active {
             background: var(--accent-gradient);
-            color: white;
+            color: #ffffff;
             border-color: transparent;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: var(--shadow-soft);
         }
 
-        /* Tool Cards */
         .tool-content {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.45s ease;
         }
 
         .tool-content.active {
@@ -139,708 +142,1633 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 20px;
+            border-radius: 26px;
+            padding: 32px;
+            box-shadow: var(--shadow-soft);
         }
 
         .card h2 {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        /* Weather Widget */
+        .card h2 span {
+            font-size: 1.25em;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .grid.two {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .grid.three {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(102, 126, 234, 0.12);
+            border: 1px solid rgba(102, 126, 234, 0.35);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        .field-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+        }
+
+        textarea {
+            min-height: 160px;
+            font-family: 'JetBrains Mono', monospace;
+            resize: vertical;
+        }
+
+        .inline-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.28);
+        }
+
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.12);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(102, 126, 234, 0.35);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .status-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 12px;
+        }
+
+        /* Weather */
         .weather-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
         }
 
         .weather-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(168, 85, 247, 0.2));
-            border-radius: 16px;
-            padding: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.22), rgba(168, 85, 247, 0.22));
+            border-radius: 18px;
+            padding: 22px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.25s ease, border 0.25s ease, box-shadow 0.25s ease;
             border: 1px solid transparent;
         }
 
-        .weather-card:hover {
-            transform: scale(1.02);
+        .weather-card.active {
             border-color: var(--accent-cyan);
+            box-shadow: 0 0 28px rgba(72, 219, 251, 0.28);
         }
 
-        .weather-card.selected {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 30px rgba(72, 219, 251, 0.3);
-        }
-
-        .weather-card .city {
-            font-size: 1.1rem;
+        .weather-city {
+            font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
-        .weather-card .temp {
-            font-size: 2rem;
+        .weather-temp {
+            font-size: 2.2rem;
             font-weight: 700;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .weather-card .condition {
+        .weather-condition {
             color: var(--text-secondary);
             font-size: 0.9rem;
-            margin-top: 5px;
+            margin-top: 6px;
+        }
+
+        .weather-detail {
+            margin-top: 24px;
+            padding: 22px;
+            border-radius: 18px;
+            background: var(--bg-elevated);
+            border: 1px solid rgba(72, 219, 251, 0.3);
         }
 
         /* Calculator */
         .calculator {
-            max-width: 400px;
+            max-width: 420px;
             margin: 0 auto;
         }
 
         .calc-display {
             background: var(--bg-secondary);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
             text-align: right;
+            border: 1px solid var(--border-color);
         }
 
-        .calc-display .expression {
+        .calc-expression {
             color: var(--text-secondary);
-            font-size: 1rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
             min-height: 24px;
+            font-family: 'JetBrains Mono', monospace;
             word-break: break-all;
         }
 
-        .calc-display .result {
-            font-size: 2.5rem;
+        .calc-result {
+            font-size: 2.6rem;
             font-weight: 700;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .calc-buttons {
+        .calc-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
         }
 
         .calc-btn {
             padding: 18px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.05);
             background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
+            color: #e5e7eb;
+            font-size: 1.15rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .calc-btn:hover {
-            background: rgba(102, 126, 234, 0.2);
-            transform: scale(1.02);
-        }
-
-        .calc-btn:active {
-            transform: scale(0.98);
+            transition: transform 0.15s ease, background 0.15s ease;
         }
 
         .calc-btn.operator {
-            background: rgba(102, 126, 234, 0.2);
             color: var(--accent-cyan);
+            background: rgba(102, 126, 234, 0.2);
         }
 
         .calc-btn.equals {
             background: var(--accent-gradient);
+            color: #fff;
             grid-column: span 2;
+            box-shadow: 0 12px 28px rgba(102, 126, 234, 0.28);
         }
 
         .calc-btn.clear {
             color: var(--accent-pink);
         }
 
-        /* Unit Converter */
-        .converter {
+        .calc-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Unit converter */
+        .converter-block + .converter-block {
+            margin-top: 32px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .converter-inputs {
             display: grid;
             grid-template-columns: 1fr auto 1fr;
-            gap: 20px;
+            gap: 18px;
             align-items: center;
         }
 
-        @media (max-width: 600px) {
-            .converter {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .converter select, .converter input {
-            width: 100%;
-            padding: 15px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
         .converter-arrow {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--accent-cyan);
         }
 
-        /* BMI Calculator */
-        .bmi-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+        .converter-result {
+            margin-top: 14px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
         }
 
-        .bmi-inputs input {
-            width: 100%;
-            padding: 15px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 1.1rem;
+        @media (max-width: 720px) {
+            .converter-inputs {
+                grid-template-columns: 1fr;
+            }
+            .converter-arrow { display: none; }
+        }
+
+        /* BMI */
+        .bmi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
 
         .bmi-result {
+            margin-top: 26px;
+            padding: 26px;
+            border-radius: 18px;
+            border: 1px solid transparent;
+            background: var(--bg-elevated);
             text-align: center;
-            padding: 30px;
-            border-radius: 16px;
             display: none;
         }
 
         .bmi-result.show {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
 
         .bmi-value {
-            font-size: 3rem;
+            font-size: 3.1rem;
             font-weight: 700;
         }
 
         .bmi-category {
-            font-size: 1.2rem;
-            margin-top: 10px;
+            font-size: 1.1rem;
+            margin-top: 8px;
         }
 
         .bmi-scale {
-            display: flex;
-            height: 10px;
-            border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            height: 12px;
+            border-radius: 6px;
             overflow: hidden;
             margin-top: 20px;
         }
 
-        .bmi-scale div {
-            flex: 1;
-        }
-
-        .bmi-scale .underweight { background: #60a5fa; }
-        .bmi-scale .normal { background: #34d399; }
-        .bmi-scale .overweight { background: #fbbf24; }
-        .bmi-scale .obese { background: #f87171; }
+        .bmi-scale div:nth-child(1) { background: #60a5fa; }
+        .bmi-scale div:nth-child(2) { background: #34d399; }
+        .bmi-scale div:nth-child(3) { background: #fbbf24; }
+        .bmi-scale div:nth-child(4) { background: #f87171; }
 
         /* Timer */
         .timer-display {
-            font-size: 4rem;
+            font-size: clamp(3rem, 8vw, 4.4rem);
             font-weight: 700;
             text-align: center;
             font-family: 'JetBrains Mono', monospace;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin: 20px 0;
+            margin: 26px 0;
         }
 
         .timer-inputs {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .timer-inputs input {
-            width: 80px;
-            padding: 15px;
+            width: 90px;
+            padding: 16px;
             text-align: center;
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         .timer-controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
-        .timer-btn {
-            padding: 15px 30px;
-            font-size: 1rem;
-            font-weight: 600;
+        /* Currency converter */
+        .rates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .rate-badge {
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: rgba(224, 242, 254, 0.92);
+        }
+
+        .currency-result {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            margin-top: 22px;
+        }
+
+        /* Password generator */
+        .switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
             border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
+            background: rgba(148, 163, 184, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.15);
         }
 
-        .timer-btn.start {
-            background: var(--accent-gradient);
-            color: white;
+        .switch input {
+            accent-color: #6366f1;
+            width: 18px;
+            height: 18px;
         }
 
-        .timer-btn.pause {
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-            border: 1px solid #fbbf24;
+        .range-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
-        .timer-btn.reset {
-            background: rgba(244, 114, 182, 0.2);
-            color: var(--accent-pink);
-            border: 1px solid var(--accent-pink);
+        .range-wrapper span {
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
         }
 
-        /* Footer */
+        input[type="range"] {
+            flex: 1;
+        }
+
+        .password-output {
+            margin-top: 18px;
+            padding: 18px 20px;
+            border-radius: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .password-output span {
+            font-size: 1.1rem;
+            word-break: break-word;
+        }
+
+        /* Color picker */
+        .color-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 22px;
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 0 20px rgba(15, 23, 42, 0.35);
+        }
+
+        .color-values {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        /* JSON tool */
+        .json-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .json-output {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 18px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            font-family: 'JetBrains Mono', monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 320px;
+            overflow: auto;
+        }
+
+        .error-text {
+            color: #f87171;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
         footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 50px 0 20px;
             color: var(--text-secondary);
+            font-size: 0.85rem;
         }
 
         footer a {
             color: var(--accent-cyan);
             text-decoration: none;
         }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
-    
+
     <div class="container">
         <header>
             <h1>🧰 Jarvis Toolkit</h1>
-            <p>实用工具箱 - 天气 · 计算器 · 单位转换 · BMI · 计时器</p>
+            <p>轻盈 · 高效 · 暗色主题实用工具合集</p>
         </header>
 
-        <nav class="tabs">
+        <nav class="tabs" aria-label="Toolkit navigation">
             <button class="tab-btn active" data-tab="weather">🌤️ 天气</button>
             <button class="tab-btn" data-tab="calculator">🧮 计算器</button>
             <button class="tab-btn" data-tab="converter">📐 单位转换</button>
             <button class="tab-btn" data-tab="bmi">⚖️ BMI</button>
             <button class="tab-btn" data-tab="timer">⏱️ 计时器</button>
+            <button class="tab-btn" data-tab="currency">💱 汇率转换</button>
+            <button class="tab-btn" data-tab="password">🔐 密码生成器</button>
+            <button class="tab-btn" data-tab="color">🎨 颜色选择器</button>
+            <button class="tab-btn" data-tab="json">🧾 JSON 格式化</button>
         </nav>
 
         <!-- Weather -->
-        <section id="weather" class="tool-content active">
+        <section id="weather" class="tool-content active" aria-labelledby="weather">
             <div class="card">
-                <h2>🌤️ 全球天气</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 20px;">点击城市查看天气详情</p>
-                <div class="weather-grid">
-                    <div class="weather-card selected" data-city="madrid" data-temp="12" data-condition="☀️ 晴朗">
-                        <div class="city">🇪🇸 马德里</div>
-                        <div class="temp">12°C</div>
-                        <div class="condition">晴朗</div>
-                    </div>
-                    <div class="weather-card" data-city="beijing" data-temp="3" data-condition="❄️ 多云">
-                        <div class="city">🇨🇳 北京</div>
-                        <div class="temp">3°C</div>
-                        <div class="condition">多云</div>
-                    </div>
-                    <div class="weather-card" data-city="nyc" data-temp="8" data-condition="🌧️ 小雨">
-                        <div class="city">🇺🇸 纽约</div>
-                        <div class="temp">8°C</div>
-                        <div class="condition">小雨</div>
-                    </div>
-                    <div class="weather-card" data-city="tokyo" data-temp="15" data-condition="🌤️ 晴朗">
-                        <div class="city">🇯🇵 东京</div>
-                        <div class="temp">15°C</div>
-                        <div class="condition">晴朗</div>
-                    </div>
-                    <div class="weather-card" data-city="london" data-temp="9" data-condition="🌧️ 小雨">
-                        <div class="city">🇬🇧 伦敦</div>
-                        <div class="temp">9°C</div>
-                        <div class="condition">小雨</div>
-                    </div>
-                    <div class="weather-card" data-city="paris" data-temp="11" data-condition="⛅ 多云">
-                        <div class="city">🇫🇷 巴黎</div>
-                        <div class="temp">11°C</div>
-                        <div class="condition">多云</div>
-                    </div>
+                <h2><span>🌤️</span>全球城市天气</h2>
+                <p class="card-subtitle">点击切换城市，下方显示当前选中城市的天气状况</p>
+
+                <div class="weather-grid" id="weather-grid">
+                    <article class="weather-card active" data-city="马德里" data-temp="12" data-condition="晴朗" data-emoji="☀️">
+                        <div class="weather-city">🇪🇸 马德里</div>
+                        <div class="weather-temp">12°C</div>
+                        <div class="weather-condition">晴朗</div>
+                    </article>
+                    <article class="weather-card" data-city="北京" data-temp="3" data-condition="多云" data-emoji="❄️">
+                        <div class="weather-city">🇨🇳 北京</div>
+                        <div class="weather-temp">3°C</div>
+                        <div class="weather-condition">多云</div>
+                    </article>
+                    <article class="weather-card" data-city="纽约" data-temp="8" data-condition="小雨" data-emoji="🌧️">
+                        <div class="weather-city">🇺🇸 纽约</div>
+                        <div class="weather-temp">8°C</div>
+                        <div class="weather-condition">小雨</div>
+                    </article>
+                    <article class="weather-card" data-city="东京" data-temp="15" data-condition="晴朗" data-emoji="🌤️">
+                        <div class="weather-city">🇯🇵 东京</div>
+                        <div class="weather-temp">15°C</div>
+                        <div class="weather-condition">晴朗</div>
+                    </article>
+                    <article class="weather-card" data-city="伦敦" data-temp="9" data-condition="小雨" data-emoji="🌧️">
+                        <div class="weather-city">🇬🇧 伦敦</div>
+                        <div class="weather-temp">9°C</div>
+                        <div class="weather-condition">小雨</div>
+                    </article>
+                    <article class="weather-card" data-city="巴黎" data-temp="11" data-condition="多云" data-emoji="⛅">
+                        <div class="weather-city">🇫🇷 巴黎</div>
+                        <div class="weather-temp">11°C</div>
+                        <div class="weather-condition">多云</div>
+                    </article>
                 </div>
+
+                <div class="weather-detail" id="weather-detail" aria-live="polite"></div>
             </div>
         </section>
 
         <!-- Calculator -->
-        <section id="calculator" class="tool-content">
+        <section id="calculator" class="tool-content" aria-labelledby="calculator">
             <div class="card">
-                <h2>🧮 计算器</h2>
+                <h2><span>🧮</span>科学运算计算器</h2>
+                <p class="card-subtitle">支持加减乘除、百分号与小数，键盘输入同样适用</p>
+
                 <div class="calculator">
                     <div class="calc-display">
-                        <div class="expression" id="calc-expr"></div>
-                        <div class="result" id="calc-result">0</div>
+                        <div class="calc-expression" id="calc-expression"></div>
+                        <div class="calc-result" id="calc-result">0</div>
                     </div>
-                    <div class="calc-buttons">
-                        <button class="calc-btn clear" onclick="calcClear()">C</button>
-                        <button class="calc-btn" onclick="calcBackspace()">⌫</button>
-                        <button class="calc-btn operator" onclick="calcOperator('%')">%</button>
-                        <button class="calc-btn operator" onclick="calcOperator('/')">÷</button>
-                        
-                        <button class="calc-btn" onclick="calcNumber('7')">7</button>
-                        <button class="calc-btn" onclick="calcNumber('8')">8</button>
-                        <button class="calc-btn" onclick="calcNumber('9')">9</button>
-                        <button class="calc-btn operator" onclick="calcOperator('*')">×</button>
-                        
-                        <button class="calc-btn" onclick="calcNumber('4')">4</button>
-                        <button class="calc-btn" onclick="calcNumber('5')">5</button>
-                        <button class="calc-btn" onclick="calcNumber('6')">6</button>
-                        <button class="calc-btn operator" onclick="calcOperator('-')">−</button>
-                        
-                        <button class="calc-btn" onclick="calcNumber('1')">1</button>
-                        <button class="calc-btn" onclick="calcNumber('2')">2</button>
-                        <button class="calc-btn" onclick="calcNumber('3')">3</button>
-                        <button class="calc-btn operator" onclick="calcOperator('+')">+</button>
-                        
-                        <button class="calc-btn" onclick="calcNumber('0')">0</button>
-                        <button class="calc-btn" onclick="calcNumber('.')">.</button>
-                        <button class="calc-btn equals" onclick="calcEquals()">=</button>
-                    </div>
+                    <div class="calc-grid" id="calc-grid"></div>
                 </div>
             </div>
         </section>
 
         <!-- Unit Converter -->
-        <section id="converter" class="tool-content">
+        <section id="converter" class="tool-content" aria-labelledby="converter">
             <div class="card">
-                <h2>📐 单位转换</h2>
-                
-                <div style="margin-bottom: 30px;">
-                    <h3 style="margin-bottom: 15px; color: var(--text-secondary);">长度</h3>
-                    <div class="converter">
-                        <input type="number" id="length-input" placeholder="输入数值" oninput="convertLength()">
-                        <select id="length-from" onchange="convertLength()">
-                            <option value="m">米</option>
-                            <option value="km">千米</option>
-                            <option value="cm">厘米</option>
-                            <option value="mm">毫米</option>
-                            <option value="ft">英尺</option>
-                            <option value="in">英寸</option>
-                            <option value="mi">英里</option>
-                        </select>
-                        <span class="converter-arrow">→</span>
-                        <select id="length-to" onchange="convertLength()">
-                            <option value="m">米</option>
-                            <option value="km">千米</option>
-                            <option value="cm">厘米</option>
-                            <option value="mm">毫米</option>
-                            <option value="ft" selected>英尺</option>
-                            <option value="in">英寸</option>
-                            <option value="mi">英里</option>
-                        </select>
+                <h2><span>📐</span>多单位转换</h2>
+                <p class="card-subtitle">长度、重量、温度一键转换，支持常见国际单位</p>
+
+                <div class="converter-block" data-type="length">
+                    <div class="inline-group" style="justify-content: space-between;">
+                        <h3 style="font-size: 1.05rem;">长度转换</h3>
+                        <span class="chip">m · km · cm · ft · mi</span>
                     </div>
-                    <p id="length-result" style="text-align: center; margin-top: 15px; font-size: 1.5rem; font-weight: 600;"></p>
+                    <div class="converter-inputs">
+                        <div>
+                            <label class="field-label" for="length-input">输入数值</label>
+                            <input class="input" id="length-input" type="number" placeholder="输入长度">
+                        </div>
+                        <div>
+                            <label class="field-label" for="length-from">原始单位</label>
+                            <select id="length-from">
+                                <option value="m">米 (m)</option>
+                                <option value="km">千米 (km)</option>
+                                <option value="cm">厘米 (cm)</option>
+                                <option value="mm">毫米 (mm)</option>
+                                <option value="ft">英尺 (ft)</option>
+                                <option value="in">英寸 (in)</option>
+                                <option value="mi">英里 (mi)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="field-label" for="length-to">目标单位</label>
+                            <select id="length-to">
+                                <option value="m">米 (m)</option>
+                                <option value="km">千米 (km)</option>
+                                <option value="cm">厘米 (cm)</option>
+                                <option value="mm">毫米 (mm)</option>
+                                <option value="ft" selected>英尺 (ft)</option>
+                                <option value="in">英寸 (in)</option>
+                                <option value="mi">英里 (mi)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="converter-result" id="length-result"></p>
                 </div>
 
-                <div style="margin-bottom: 30px;">
-                    <h3 style="margin-bottom: 15px; color: var(--text-secondary);">重量</h3>
-                    <div class="converter">
-                        <input type="number" id="weight-input" placeholder="输入数值" oninput="convertWeight()">
-                        <select id="weight-from" onchange="convertWeight()">
-                            <option value="kg">千克</option>
-                            <option value="g">克</option>
-                            <option value="lb">磅</option>
-                            <option value="oz">盎司</option>
-                        </select>
-                        <span class="converter-arrow">→</span>
-                        <select id="weight-to" onchange="convertWeight()">
-                            <option value="kg">千克</option>
-                            <option value="g">克</option>
-                            <option value="lb" selected>磅</option>
-                            <option value="oz">盎司</option>
-                        </select>
+                <div class="converter-block" data-type="weight">
+                    <div class="inline-group" style="justify-content: space-between;">
+                        <h3 style="font-size: 1.05rem;">重量转换</h3>
+                        <span class="chip">kg · g · lb · oz</span>
                     </div>
-                    <p id="weight-result" style="text-align: center; margin-top: 15px; font-size: 1.5rem; font-weight: 600;"></p>
+                    <div class="converter-inputs">
+                        <div>
+                            <label class="field-label" for="weight-input">输入数值</label>
+                            <input class="input" id="weight-input" type="number" placeholder="输入重量">
+                        </div>
+                        <div>
+                            <label class="field-label" for="weight-from">原始单位</label>
+                            <select id="weight-from">
+                                <option value="kg">千克 (kg)</option>
+                                <option value="g">克 (g)</option>
+                                <option value="lb">磅 (lb)</option>
+                                <option value="oz">盎司 (oz)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="field-label" for="weight-to">目标单位</label>
+                            <select id="weight-to">
+                                <option value="kg">千克 (kg)</option>
+                                <option value="g">克 (g)</option>
+                                <option value="lb" selected>磅 (lb)</option>
+                                <option value="oz">盎司 (oz)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="converter-result" id="weight-result"></p>
                 </div>
 
-                <div>
-                    <h3 style="margin-bottom: 15px; color: var(--text-secondary);">温度</h3>
-                    <div class="converter">
-                        <input type="number" id="temp-input" placeholder="输入数值" oninput="convertTemp()">
-                        <select id="temp-from" onchange="convertTemp()">
-                            <option value="C">摄氏度 °C</option>
-                            <option value="F">华氏度 °F</option>
-                            <option value="K">开尔文 K</option>
-                        </select>
-                        <span class="converter-arrow">→</span>
-                        <select id="temp-to" onchange="convertTemp()">
-                            <option value="C">摄氏度 °C</option>
-                            <option value="F" selected>华氏度 °F</option>
-                            <option value="K">开尔文 K</option>
-                        </select>
+                <div class="converter-block" data-type="temperature">
+                    <div class="inline-group" style="justify-content: space-between;">
+                        <h3 style="font-size: 1.05rem;">温度转换</h3>
+                        <span class="chip">℃ · ℉ · K</span>
                     </div>
-                    <p id="temp-result" style="text-align: center; margin-top: 15px; font-size: 1.5rem; font-weight: 600;"></p>
+                    <div class="converter-inputs">
+                        <div>
+                            <label class="field-label" for="temp-input">输入数值</label>
+                            <input class="input" id="temp-input" type="number" placeholder="输入温度">
+                        </div>
+                        <div>
+                            <label class="field-label" for="temp-from">原始单位</label>
+                            <select id="temp-from">
+                                <option value="C">摄氏度 (°C)</option>
+                                <option value="F">华氏度 (°F)</option>
+                                <option value="K">开尔文 (K)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="field-label" for="temp-to">目标单位</label>
+                            <select id="temp-to">
+                                <option value="C">摄氏度 (°C)</option>
+                                <option value="F" selected>华氏度 (°F)</option>
+                                <option value="K">开尔文 (K)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="converter-result" id="temp-result"></p>
                 </div>
             </div>
         </section>
 
         <!-- BMI -->
-        <section id="bmi" class="tool-content">
+        <section id="bmi" class="tool-content" aria-labelledby="bmi">
             <div class="card">
-                <h2>⚖️ BMI 计算器</h2>
-                <div class="bmi-inputs">
+                <h2><span>⚖️</span>BMI 体脂评估</h2>
+                <p class="card-subtitle">输入身高与体重，查看 BMI 值及健康区间提示</p>
+
+                <div class="bmi-grid">
                     <div>
-                        <label style="display: block; margin-bottom: 10px; color: var(--text-secondary);">身高 (cm)</label>
-                        <input type="number" id="bmi-height" placeholder="170" oninput="calculateBMI()">
+                        <label class="field-label" for="bmi-height">身高 (cm)</label>
+                        <input class="input" id="bmi-height" type="number" placeholder="175" min="80" max="250">
                     </div>
                     <div>
-                        <label style="display: block; margin-bottom: 10px; color: var(--text-secondary);">体重 (kg)</label>
-                        <input type="number" id="bmi-weight" placeholder="70" oninput="calculateBMI()">
+                        <label class="field-label" for="bmi-weight">体重 (kg)</label>
+                        <input class="input" id="bmi-weight" type="number" placeholder="68" min="20" max="250">
                     </div>
                 </div>
-                <div class="bmi-result" id="bmi-result">
-                    <div class="bmi-value" id="bmi-value">0</div>
-                    <div class="bmi-category" id="bmi-category">请输入身高和体重</div>
-                    <div class="bmi-scale">
-                        <div class="underweight"></div>
-                        <div class="normal"></div>
-                        <div class="overweight"></div>
-                        <div class="obese"></div>
+
+                <div class="bmi-result" id="bmi-result" aria-live="polite">
+                    <div class="bmi-value" id="bmi-value">0.0</div>
+                    <div class="bmi-category" id="bmi-category">请输入身高与体重</div>
+                    <div class="bmi-scale" aria-hidden="true">
+                        <div></div><div></div><div></div><div></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Timer -->
-        <section id="timer" class="tool-content">
+        <section id="timer" class="tool-content" aria-labelledby="timer">
             <div class="card">
-                <h2>⏱️ 倒计时</h2>
-                <div class="timer-display" id="timer-display">00:00:00</div>
+                <h2><span>⏱️</span>倒计时定时器</h2>
+                <p class="card-subtitle">设置时、分、秒并启动倒计时，支持暂停与重置</p>
+
+                <div class="timer-display" id="timer-display">00:05:00</div>
+
                 <div class="timer-inputs">
-                    <input type="number" id="timer-hours" placeholder="时" min="0" max="99" value="0">
-                    <input type="number" id="timer-minutes" placeholder="分" min="0" max="59" value="5">
-                    <input type="number" id="timer-seconds" placeholder="秒" min="0" max="59" value="0">
+                    <input id="timer-hours" type="number" min="0" max="99" value="0" aria-label="小时">
+                    <input id="timer-minutes" type="number" min="0" max="59" value="5" aria-label="分钟">
+                    <input id="timer-seconds" type="number" min="0" max="59" value="0" aria-label="秒">
                 </div>
+
                 <div class="timer-controls">
-                    <button class="timer-btn start" onclick="startTimer()">开始</button>
-                    <button class="timer-btn pause" onclick="pauseTimer()">暂停</button>
-                    <button class="timer-btn reset" onclick="resetTimer()">重置</button>
+                    <button class="btn btn-primary" id="timer-start">开始</button>
+                    <button class="btn btn-secondary" id="timer-pause">暂停</button>
+                    <button class="btn btn-ghost" id="timer-reset">重置</button>
                 </div>
             </div>
         </section>
 
+        <!-- Currency converter -->
+        <section id="currency" class="tool-content" aria-labelledby="currency">
+            <div class="card">
+                <h2><span>💱</span>实时汇率转换</h2>
+                <p class="card-subtitle">基于 ExchangeRate-API 免费接口，首次加载需等待汇率数据</p>
+
+                <div class="grid two">
+                    <div>
+                        <label class="field-label" for="currency-amount">金额</label>
+                        <input class="input" id="currency-amount" type="number" placeholder="100" value="100" min="0" step="0.01">
+                    </div>
+                    <div class="inline-group" style="justify-content: flex-end; gap: 10px;">
+                        <button class="btn btn-ghost" id="currency-refresh">刷新汇率</button>
+                        <button class="btn btn-secondary" id="currency-swap">⇄ 互换</button>
+                    </div>
+                </div>
+
+                <div class="grid two" style="margin-top: 22px;">
+                    <div>
+                        <label class="field-label" for="currency-from">原币种</label>
+                        <select id="currency-from"></select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="currency-to">目标币种</label>
+                        <select id="currency-to"></select>
+                    </div>
+                </div>
+
+                <div class="currency-result" id="currency-result">--</div>
+                <p class="status-text" id="currency-updated">正在加载汇率...</p>
+
+                <div class="rates-grid" id="currency-highlights" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <!-- Password generator -->
+        <section id="password" class="tool-content" aria-labelledby="password">
+            <div class="card">
+                <h2><span>🔐</span>安全密码生成器</h2>
+                <p class="card-subtitle">支持大小写字母、数字、符号，自定义长度并快速复制</p>
+
+                <div class="grid two">
+                    <div>
+                        <span class="field-label">密码长度</span>
+                        <div class="range-wrapper">
+                            <input id="password-length" type="range" min="6" max="48" value="16">
+                            <span id="password-length-value">16</span>
+                        </div>
+                    </div>
+                    <div class="inline-group" style="justify-content: flex-end; gap: 10px;">
+                        <label class="switch">
+                            <input type="checkbox" id="password-lower" checked>
+                            <span>小写</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="password-upper" checked>
+                            <span>大写</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="password-number" checked>
+                            <span>数字</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="password-symbol" checked>
+                            <span>符号</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="password-output" id="password-output">
+                    <span id="password-value">点击生成密码</span>
+                    <div class="inline-group">
+                        <button class="btn btn-primary" id="password-generate">生成</button>
+                        <button class="btn btn-secondary" id="password-copy">复制</button>
+                    </div>
+                </div>
+
+                <p class="status-text" id="password-status"></p>
+            </div>
+        </section>
+
+        <!-- Color picker -->
+        <section id="color" class="tool-content" aria-labelledby="color">
+            <div class="card">
+                <h2><span>🎨</span>颜色选择器</h2>
+                <p class="card-subtitle">选择色彩或输入 HEX 值，将自动转换为 RGB 与 HSL</p>
+
+                <div class="grid two" style="align-items: center;">
+                    <div class="inline-group" style="gap: 20px;">
+                        <div class="color-preview" id="color-preview"></div>
+                        <div>
+                            <label class="field-label" for="color-input">选择颜色</label>
+                            <input id="color-input" type="color" value="#4f46e5">
+                            <label class="field-label" for="color-hex" style="margin-top: 18px;">HEX 输入</label>
+                            <input class="input" id="color-hex" type="text" value="#4f46e5" placeholder="#4f46e5">
+                        </div>
+                    </div>
+                    <div class="color-values">
+                        <div class="color-row">
+                            <span>HEX</span>
+                            <span id="color-hex-value">#4F46E5</span>
+                        </div>
+                        <div class="color-row">
+                            <span>RGB</span>
+                            <span id="color-rgb-value">79, 70, 229</span>
+                        </div>
+                        <div class="color-row">
+                            <span>HSL</span>
+                            <span id="color-hsl-value">243°, 79%, 59%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JSON formatter -->
+        <section id="json" class="tool-content" aria-labelledby="json">
+            <div class="card">
+                <h2><span>🧾</span>JSON 格式化工具</h2>
+                <p class="card-subtitle">粘贴 JSON 字符串，一键格式化或压缩，方便阅读与传输</p>
+
+                <label class="field-label" for="json-input">输入 JSON</label>
+                <textarea id="json-input" placeholder='{"hello":"world"}'></textarea>
+
+                <div class="json-actions">
+                    <button class="btn btn-primary" id="json-format">格式化</button>
+                    <button class="btn btn-secondary" id="json-minify">压缩</button>
+                    <button class="btn btn-ghost" id="json-copy">复制输出</button>
+                    <button class="btn btn-ghost" id="json-clear">清空</button>
+                </div>
+
+                <div class="json-output" id="json-output">结果会显示在这里</div>
+                <p class="error-text" id="json-error"></p>
+            </div>
+        </section>
+
         <footer>
-            <p>🧠 Powered by <a href="#">Jarvis AI</a> · Created with Codex</p>
+            <p>🧠 Powered by <a href="https://github.com/ocean-Go/jarvis-toolkit" target="_blank" rel="noreferrer">Jarvis Toolkit</a> · Crafted with 💜 by Codex</p>
         </footer>
     </div>
 
     <script>
-        // Tab Navigation
-        const tabs = document.querySelectorAll('.tab-btn');
-        const contents = document.querySelectorAll('.tool-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById(tab.dataset.tab).classList.add('active');
-            });
-        });
-
-        // Calculator
-        let calcExpr = '';
-        let calcResult = '0';
-
-        function calcNumber(n) {
-            calcExpr += n;
-            calcResult = calcExpr;
-            updateCalcDisplay();
-        }
-
-        function calcOperator(op) {
-            calcExpr += ' ' + op + ' ';
-            calcResult = calcExpr;
-            updateCalcDisplay();
-        }
-
-        function calcClear() {
-            calcExpr = '';
-            calcResult = '0';
-            updateCalcDisplay();
-        }
-
-        function calcBackspace() {
-            calcExpr = calcExpr.slice(0, -1);
-            calcResult = calcExpr || '0';
-            updateCalcDisplay();
-        }
-
-        function calcEquals() {
-            try {
-                calcResult = eval(calcExpr).toString();
-                calcExpr = calcResult;
-                updateCalcDisplay();
-            } catch(e) {
-                calcResult = 'Error';
-                updateCalcDisplay();
-            }
-        }
-
-        function updateCalcDisplay() {
-            document.getElementById('calc-expr').textContent = calcExpr;
-            document.getElementById('calc-result').textContent = calcResult;
-        }
-
-        // Unit Converter - Length
-        function convertLength() {
-            const val = parseFloat(document.getElementById('length-input').value);
-            const from = document.getElementById('length-from').value;
-            const to = document.getElementById('length-to').value;
-            
-            if (isNaN(val)) {
-                document.getElementById('length-result').textContent = '';
-                return;
-            }
-
-            const factors = { m: 1, km: 1000, cm: 0.01, mm: 0.001, ft: 0.3048, in: 0.0254, mi: 1609.344 };
-            const result = (val * factors[from] / factors[to]).toFixed(4);
-            document.getElementById('length-result').textContent = `${val} ${from} = ${result} ${to}`;
-        }
-
-        // Unit Converter - Weight
-        function convertWeight() {
-            const val = parseFloat(document.getElementById('weight-input').value);
-            const from = document.getElementById('weight-from').value;
-            const to = document.getElementById('weight-to').value;
-            
-            if (isNaN(val)) {
-                document.getElementById('weight-result').textContent = '';
-                return;
-            }
-
-            const factors = { kg: 1, g: 0.001, lb: 0.453592, oz: 0.0283495 };
-            const result = (val * factors[from] / factors[to]).toFixed(4);
-            document.getElementById('weight-result').textContent = `${val} ${from} = ${result} ${to}`;
-        }
-
-        // Unit Converter - Temperature
-        function convertTemp() {
-            let val = parseFloat(document.getElementById('temp-input').value);
-            const from = document.getElementById('temp-from').value;
-            const to = document.getElementById('temp-to').value;
-            
-            if (isNaN(val)) {
-                document.getElementById('temp-result').textContent = '';
-                return;
-            }
-
-            // Convert to Celsius first
-            if (from === 'F') val = (val - 32) * 5/9;
-            if (from === 'K') val = val - 273.15;
-
-            // Convert from Celsius to target
-            let result;
-            if (to === 'C') result = val;
-            if (to === 'F') result = val * 9/5 + 32;
-            if (to === 'K') result = val + 273.15;
-
-            document.getElementById('temp-result').textContent = `${document.getElementById('temp-input').value}°${from} = ${result.toFixed(2)}°${to}`;
-        }
-
-        // BMI Calculator
-        function calculateBMI() {
-            const height = parseFloat(document.getElementById('bmi-height').value);
-            const weight = parseFloat(document.getElementById('bmi-weight').value);
-            
-            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
-                document.getElementById('bmi-result').classList.remove('show');
-                return;
-            }
-
-            const bmi = weight / ((height/100) ** 2);
-            document.getElementById('bmi-value').textContent = bmi.toFixed(1);
-            
-            let category, color;
-            if (bmi < 18.5) { category = '偏瘦'; color = '#60a5fa'; }
-            else if (bmi < 24) { category = '正常'; color = '#34d399'; }
-            else if (bmi < 28) { category = '偏胖'; color = '#fbbf24'; }
-            else { category = '肥胖'; color = '#f87171'; }
-
-            document.getElementById('bmi-category').textContent = category;
-            document.getElementById('bmi-category').style.color = color;
-            document.getElementById('bmi-result').classList.add('show');
-        }
-
-        // Timer
-        let timerInterval;
-        let timerRunning = false;
-        let totalSeconds = 0;
-
-        function updateTimerDisplay() {
-            const h = Math.floor(totalSeconds / 3600);
-            const m = Math.floor((totalSeconds % 3600) / 60);
-            const s = totalSeconds % 60;
-            document.getElementById('timer-display').textContent = 
-                `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-        }
-
-        function startTimer() {
-            if (timerRunning) return;
-            
-            const h = parseInt(document.getElementById('timer-hours').value) || 0;
-            const m = parseInt(document.getElementById('timer-minutes').value) || 0;
-            const s = parseInt(document.getElementById('timer-seconds').value) || 0;
-            
-            totalSeconds = h * 3600 + m * 60 + s;
-            
-            if (totalSeconds <= 0) return;
-            
-            timerRunning = true;
-            timerInterval = setInterval(() => {
-                totalSeconds--;
-                updateTimerDisplay();
-                if (totalSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    timerRunning = false;
-                    alert('⏰ 时间到！');
+        const Toolkit = (() => {
+            const state = {
+                calcExpression: '',
+                timer: {
+                    interval: null,
+                    totalSeconds: 300,
+                    running: false,
+                },
+                currency: {
+                    base: 'USD',
+                    target: 'CNY',
+                    amount: 100,
+                    rates: {},
+                    updatedAt: null,
+                    loading: false,
                 }
-            }, 1000);
-        }
+            };
 
-        function pauseTimer() {
-            clearInterval(timerInterval);
-            timerRunning = false;
-        }
+            const selectors = {
+                tabs: document.querySelectorAll('.tab-btn'),
+                contents: document.querySelectorAll('.tool-content'),
+                weatherCards: document.querySelectorAll('.weather-card'),
+                weatherDetail: document.getElementById('weather-detail'),
+                calcExpression: document.getElementById('calc-expression'),
+                calcResult: document.getElementById('calc-result'),
+                calcGrid: document.getElementById('calc-grid'),
+                converter: {
+                    length: {
+                        input: document.getElementById('length-input'),
+                        from: document.getElementById('length-from'),
+                        to: document.getElementById('length-to'),
+                        result: document.getElementById('length-result')
+                    },
+                    weight: {
+                        input: document.getElementById('weight-input'),
+                        from: document.getElementById('weight-from'),
+                        to: document.getElementById('weight-to'),
+                        result: document.getElementById('weight-result')
+                    },
+                    temp: {
+                        input: document.getElementById('temp-input'),
+                        from: document.getElementById('temp-from'),
+                        to: document.getElementById('temp-to'),
+                        result: document.getElementById('temp-result')
+                    }
+                },
+                bmi: {
+                    height: document.getElementById('bmi-height'),
+                    weight: document.getElementById('bmi-weight'),
+                    resultCard: document.getElementById('bmi-result'),
+                    value: document.getElementById('bmi-value'),
+                    category: document.getElementById('bmi-category')
+                },
+                timer: {
+                    display: document.getElementById('timer-display'),
+                    hours: document.getElementById('timer-hours'),
+                    minutes: document.getElementById('timer-minutes'),
+                    seconds: document.getElementById('timer-seconds'),
+                    start: document.getElementById('timer-start'),
+                    pause: document.getElementById('timer-pause'),
+                    reset: document.getElementById('timer-reset')
+                },
+                currency: {
+                    amount: document.getElementById('currency-amount'),
+                    from: document.getElementById('currency-from'),
+                    to: document.getElementById('currency-to'),
+                    swap: document.getElementById('currency-swap'),
+                    refresh: document.getElementById('currency-refresh'),
+                    result: document.getElementById('currency-result'),
+                    updated: document.getElementById('currency-updated'),
+                    highlights: document.getElementById('currency-highlights'),
+                },
+                password: {
+                    length: document.getElementById('password-length'),
+                    lengthValue: document.getElementById('password-length-value'),
+                    lower: document.getElementById('password-lower'),
+                    upper: document.getElementById('password-upper'),
+                    number: document.getElementById('password-number'),
+                    symbol: document.getElementById('password-symbol'),
+                    generate: document.getElementById('password-generate'),
+                    copy: document.getElementById('password-copy'),
+                    value: document.getElementById('password-value'),
+                    status: document.getElementById('password-status')
+                },
+                color: {
+                    preview: document.getElementById('color-preview'),
+                    input: document.getElementById('color-input'),
+                    hexInput: document.getElementById('color-hex'),
+                    hexValue: document.getElementById('color-hex-value'),
+                    rgbValue: document.getElementById('color-rgb-value'),
+                    hslValue: document.getElementById('color-hsl-value')
+                },
+                json: {
+                    input: document.getElementById('json-input'),
+                    output: document.getElementById('json-output'),
+                    error: document.getElementById('json-error'),
+                    format: document.getElementById('json-format'),
+                    minify: document.getElementById('json-minify'),
+                    copy: document.getElementById('json-copy'),
+                    clear: document.getElementById('json-clear')
+                }
+            };
 
-        function resetTimer() {
-            pauseTimer();
-            totalSeconds = 0;
-            updateTimerDisplay();
-        }
+            const calculatorButtons = [
+                { label: 'C', action: 'clear', className: 'clear' },
+                { label: '⌫', action: 'backspace' },
+                { label: '%', value: '%', className: 'operator' },
+                { label: '÷', value: '/', className: 'operator' },
+                { label: '7', value: '7' },
+                { label: '8', value: '8' },
+                { label: '9', value: '9' },
+                { label: '×', value: '*', className: 'operator' },
+                { label: '4', value: '4' },
+                { label: '5', value: '5' },
+                { label: '6', value: '6' },
+                { label: '−', value: '-', className: 'operator' },
+                { label: '1', value: '1' },
+                { label: '2', value: '2' },
+                { label: '3', value: '3' },
+                { label: '+', value: '+', className: 'operator' },
+                { label: '0', value: '0' },
+                { label: '.', value: '.' },
+                { label: '=', action: 'equals', className: 'equals' }
+            ];
+
+            const currencyList = [
+                'USD', 'EUR', 'CNY', 'JPY', 'GBP', 'AUD', 'CAD', 'HKD', 'SGD', 'KRW',
+                'TWD', 'CHF', 'SEK', 'NZD', 'THB', 'MYR', 'VND', 'PHP', 'IDR', 'RUB'
+            ];
+
+            const unitFactors = {
+                length: { m: 1, km: 1000, cm: 0.01, mm: 0.001, ft: 0.3048, in: 0.0254, mi: 1609.344 },
+                weight: { kg: 1, g: 0.001, lb: 0.45359237, oz: 0.0283495231 }
+            };
+
+            const TIMER_INTERVAL = 1000;
+            const API_BASE = 'https://open.er-api.com/v6/latest/';
+
+            // Tabs
+            const initTabs = () => {
+                selectors.tabs.forEach((tab) => {
+                    tab.addEventListener('click', () => {
+                        selectors.tabs.forEach((btn) => btn.classList.remove('active'));
+                        selectors.contents.forEach((content) => content.classList.remove('active'));
+                        tab.classList.add('active');
+                        const target = document.getElementById(tab.dataset.tab);
+                        if (target) target.classList.add('active');
+                    });
+                });
+            };
+
+            // Weather
+            const updateWeatherDetail = (card) => {
+                if (!card) return;
+                const { city, temp, condition, emoji } = card.dataset;
+                selectors.weatherDetail.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="font-size:1.1rem; color:var(--text-secondary);">当前城市</div>
+                            <div style="font-size:1.6rem; font-weight:700; margin-top:6px;">${emoji || ''} ${city}</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:2.4rem; font-weight:700;">${temp}°C</div>
+                            <div style="color:var(--text-secondary); margin-top:4px;">${condition}</div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            const initWeather = () => {
+                selectors.weatherCards.forEach((card) => {
+                    card.addEventListener('click', () => {
+                        selectors.weatherCards.forEach((c) => c.classList.remove('active'));
+                        card.classList.add('active');
+                        updateWeatherDetail(card);
+                    });
+                });
+                updateWeatherDetail(document.querySelector('.weather-card.active'));
+            };
+
+            // Calculator
+            const renderCalculator = () => {
+                const fragment = document.createDocumentFragment();
+                calculatorButtons.forEach((btnConfig) => {
+                    const btn = document.createElement('button');
+                    btn.textContent = btnConfig.label;
+                    btn.className = `calc-btn${btnConfig.className ? ' ' + btnConfig.className : ''}`;
+                    if (btnConfig.value) btn.dataset.value = btnConfig.value;
+                    if (btnConfig.action) btn.dataset.action = btnConfig.action;
+                    fragment.appendChild(btn);
+                });
+                selectors.calcGrid.appendChild(fragment);
+            };
+
+            const updateCalcDisplay = () => {
+                selectors.calcExpression.textContent = state.calcExpression;
+                selectors.calcResult.textContent = state.calcExpression ? state.calcExpression : '0';
+            };
+
+            const evaluateExpression = () => {
+                try {
+                    const result = Function(`"use strict"; return (${state.calcExpression});`)();
+                    state.calcExpression = result.toString();
+                    selectors.calcResult.textContent = result;
+                    selectors.calcExpression.textContent = result;
+                } catch (error) {
+                    selectors.calcResult.textContent = 'Error';
+                }
+            };
+
+            const bindCalculatorEvents = () => {
+                selectors.calcGrid.addEventListener('click', (event) => {
+                    const target = event.target.closest('button');
+                    if (!target) return;
+
+                    const { value, action } = target.dataset;
+
+                    if (action === 'clear') {
+                        state.calcExpression = '';
+                        updateCalcDisplay();
+                        return;
+                    }
+
+                    if (action === 'backspace') {
+                        state.calcExpression = state.calcExpression.slice(0, -1);
+                        updateCalcDisplay();
+                        return;
+                    }
+
+                    if (action === 'equals') {
+                        evaluateExpression();
+                        return;
+                    }
+
+                    if (value) {
+                        state.calcExpression += value;
+                        updateCalcDisplay();
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key.match(/[0-9+\-*/.%]/)) {
+                        state.calcExpression += event.key;
+                        updateCalcDisplay();
+                    } else if (event.key === 'Enter') {
+                        evaluateExpression();
+                    } else if (event.key === 'Backspace') {
+                        state.calcExpression = state.calcExpression.slice(0, -1);
+                        updateCalcDisplay();
+                    } else if (event.key === 'Escape') {
+                        state.calcExpression = '';
+                        updateCalcDisplay();
+                    }
+                });
+            };
+
+            // Unit converters
+            const convertLength = () => {
+                const { input, from, to, result } = selectors.converter.length;
+                const value = parseFloat(input.value);
+                if (Number.isNaN(value)) {
+                    result.textContent = '';
+                    return;
+                }
+                const meters = value * unitFactors.length[from.value];
+                const converted = meters / unitFactors.length[to.value];
+                result.textContent = `${value} ${from.value} = ${converted.toFixed(4)} ${to.value}`;
+            };
+
+            const convertWeight = () => {
+                const { input, from, to, result } = selectors.converter.weight;
+                const value = parseFloat(input.value);
+                if (Number.isNaN(value)) {
+                    result.textContent = '';
+                    return;
+                }
+                const kg = value * unitFactors.weight[from.value];
+                const converted = kg / unitFactors.weight[to.value];
+                result.textContent = `${value} ${from.value} = ${converted.toFixed(4)} ${to.value}`;
+            };
+
+            const convertTemperature = () => {
+                const { input, from, to, result } = selectors.converter.temp;
+                let value = parseFloat(input.value);
+                if (Number.isNaN(value)) {
+                    result.textContent = '';
+                    return;
+                }
+
+                if (from.value === 'F') value = (value - 32) * 5 / 9;
+                if (from.value === 'K') value = value - 273.15;
+
+                let output = value;
+                if (to.value === 'F') output = (value * 9 / 5) + 32;
+                if (to.value === 'K') output = value + 273.15;
+
+                result.textContent = `${input.value}°${from.value} = ${output.toFixed(2)}°${to.value}`;
+            };
+
+            const initConverters = () => {
+                const { length, weight, temp } = selectors.converter;
+                ['input', 'change'].forEach((event) => {
+                    length.input.addEventListener(event, convertLength);
+                    length.from.addEventListener(event, convertLength);
+                    length.to.addEventListener(event, convertLength);
+                    weight.input.addEventListener(event, convertWeight);
+                    weight.from.addEventListener(event, convertWeight);
+                    weight.to.addEventListener(event, convertWeight);
+                    temp.input.addEventListener(event, convertTemperature);
+                    temp.from.addEventListener(event, convertTemperature);
+                    temp.to.addEventListener(event, convertTemperature);
+                });
+            };
+
+            // BMI
+            const calculateBMI = () => {
+                const height = parseFloat(selectors.bmi.height.value);
+                const weight = parseFloat(selectors.bmi.weight.value);
+                if (Number.isNaN(height) || Number.isNaN(weight) || height <= 0 || weight <= 0) {
+                    selectors.bmi.resultCard.classList.remove('show');
+                    selectors.bmi.category.textContent = '请输入有效的身高和体重';
+                    return;
+                }
+
+                const bmiValue = weight / ((height / 100) ** 2);
+                selectors.bmi.value.textContent = bmiValue.toFixed(1);
+
+                let category = '偏瘦';
+                let color = '#60a5fa';
+                if (bmiValue >= 18.5 && bmiValue < 24) {
+                    category = '正常';
+                    color = '#34d399';
+                } else if (bmiValue >= 24 && bmiValue < 28) {
+                    category = '偏胖';
+                    color = '#fbbf24';
+                } else if (bmiValue >= 28) {
+                    category = '肥胖';
+                    color = '#f87171';
+                }
+
+                selectors.bmi.category.textContent = `健康区间：${category}`;
+                selectors.bmi.category.style.color = color;
+                selectors.bmi.value.style.color = color;
+                selectors.bmi.resultCard.classList.add('show');
+            };
+
+            const initBMI = () => {
+                ['input', 'change'].forEach((event) => {
+                    selectors.bmi.height.addEventListener(event, calculateBMI);
+                    selectors.bmi.weight.addEventListener(event, calculateBMI);
+                });
+            };
+
+            // Timer
+            const updateTimerDisplay = () => {
+                const { totalSeconds } = state.timer;
+                const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
+                const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
+                const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+                selectors.timer.display.textContent = `${hours}:${minutes}:${seconds}`;
+            };
+
+            const startTimer = () => {
+                if (state.timer.running) return;
+
+                const hours = parseInt(selectors.timer.hours.value, 10) || 0;
+                const minutes = parseInt(selectors.timer.minutes.value, 10) || 0;
+                const seconds = parseInt(selectors.timer.seconds.value, 10) || 0;
+                const total = hours * 3600 + minutes * 60 + seconds;
+
+                if (total <= 0) return;
+
+                state.timer.totalSeconds = total;
+                state.timer.running = true;
+                updateTimerDisplay();
+
+                state.timer.interval = setInterval(() => {
+                    state.timer.totalSeconds -= 1;
+                    updateTimerDisplay();
+                    if (state.timer.totalSeconds <= 0) {
+                        clearInterval(state.timer.interval);
+                        state.timer.running = false;
+                        alert('⏰ 时间到！');
+                    }
+                }, TIMER_INTERVAL);
+            };
+
+            const pauseTimer = () => {
+                clearInterval(state.timer.interval);
+                state.timer.running = false;
+            };
+
+            const resetTimer = () => {
+                pauseTimer();
+                state.timer.totalSeconds = 0;
+                updateTimerDisplay();
+            };
+
+            const initTimer = () => {
+                updateTimerDisplay();
+                selectors.timer.start.addEventListener('click', startTimer);
+                selectors.timer.pause.addEventListener('click', pauseTimer);
+                selectors.timer.reset.addEventListener('click', () => {
+                    resetTimer();
+                    selectors.timer.hours.value = 0;
+                    selectors.timer.minutes.value = 5;
+                    selectors.timer.seconds.value = 0;
+                    state.timer.totalSeconds = 300;
+                    updateTimerDisplay();
+                });
+            };
+
+            // Currency converter
+            const fillCurrencyOptions = () => {
+                const { from, to } = selectors.currency;
+                currencyList.forEach((code) => {
+                    const optionFrom = document.createElement('option');
+                    optionFrom.value = code;
+                    optionFrom.textContent = `${code}`;
+                    if (code === state.currency.base) optionFrom.selected = true;
+                    from.appendChild(optionFrom);
+
+                    const optionTo = document.createElement('option');
+                    optionTo.value = code;
+                    optionTo.textContent = `${code}`;
+                    if (code === state.currency.target) optionTo.selected = true;
+                    to.appendChild(optionTo);
+                });
+            };
+
+            const formatCurrency = (value, currency = 'USD') => {
+                try {
+                    return new Intl.NumberFormat('zh-CN', {
+                        style: 'currency',
+                        currency,
+                        maximumFractionDigits: value % 1 === 0 ? 0 : 4
+                    }).format(value);
+                } catch (error) {
+                    return `${value.toFixed(4)} ${currency}`;
+                }
+            };
+
+            const updateCurrencyUI = () => {
+                const { amount, base, target, rates, updatedAt, loading } = state.currency;
+                selectors.currency.amount.value = amount;
+                selectors.currency.result.textContent = loading ? '加载中...' : '--';
+
+                if (loading) {
+                    selectors.currency.updated.textContent = '正在加载汇率...';
+                    selectors.currency.highlights.innerHTML = '';
+                    return;
+                }
+
+                const rate = rates[target];
+                if (!rate) {
+                    selectors.currency.result.textContent = '未获取到目标币种汇率';
+                    return;
+                }
+
+                const converted = amount * rate;
+                selectors.currency.result.textContent = `${formatCurrency(amount, base)} ≈ ${formatCurrency(converted, target)}`;
+
+                selectors.currency.updated.textContent = updatedAt
+                    ? `最后更新时间：${updatedAt.toLocaleString('zh-CN')}`
+                    : '尚未刷新汇率';
+
+                const highlightCodes = Array.from(new Set([base, target, 'USD', 'CNY', 'EUR', 'JPY']));
+                selectors.currency.highlights.innerHTML = '';
+                highlightCodes.forEach((code) => {
+                    const baseToCode = rates[code];
+                    if (!baseToCode) return;
+                    const badge = document.createElement('div');
+                    badge.className = 'rate-badge';
+                    const codeToBase = 1 / baseToCode;
+                    const codeToTarget = rates[target] ? (rates[target] / baseToCode) : null;
+                    badge.innerHTML = `
+                        <strong style="display:block;font-size:1rem;margin-bottom:4px;">${code}</strong>
+                        <div style="font-size:0.85rem;">1 ${base} ≈ ${baseToCode.toFixed(4)} ${code}</div>
+                        <div style="font-size:0.85rem;">1 ${code} ≈ ${codeToBase.toFixed(4)} ${base}</div>
+                        ${codeToTarget && code !== target ? `<div style="font-size:0.85rem;">1 ${code} ≈ ${codeToTarget.toFixed(4)} ${target}</div>` : ''}
+                    `;
+                    selectors.currency.highlights.appendChild(badge);
+                });
+            };
+
+            const fetchRates = async (base) => {
+                state.currency.loading = true;
+                updateCurrencyUI();
+                try {
+                    const response = await fetch(`${API_BASE}${base}`);
+                    const data = await response.json();
+                    if (data.result === 'success') {
+                        state.currency.rates = data.rates;
+                        state.currency.base = data.base_code;
+                        state.currency.updatedAt = new Date(data.time_last_update_utc);
+                    } else {
+                        throw new Error(data['error-type'] || '汇率接口返回异常');
+                    }
+                } catch (error) {
+                    selectors.currency.updated.textContent = `获取汇率失败：${error.message}`;
+                } finally {
+                    state.currency.loading = false;
+                    updateCurrencyUI();
+                }
+            };
+
+            const initCurrencyConverter = () => {
+                fillCurrencyOptions();
+                fetchRates(state.currency.base);
+
+                selectors.currency.amount.addEventListener('input', (event) => {
+                    state.currency.amount = Number(event.target.value) || 0;
+                    updateCurrencyUI();
+                });
+
+                selectors.currency.from.addEventListener('change', (event) => {
+                    state.currency.base = event.target.value;
+                    fetchRates(state.currency.base);
+                });
+
+                selectors.currency.to.addEventListener('change', (event) => {
+                    state.currency.target = event.target.value;
+                    updateCurrencyUI();
+                });
+
+                selectors.currency.swap.addEventListener('click', () => {
+                    [state.currency.base, state.currency.target] = [state.currency.target, state.currency.base];
+                    selectors.currency.from.value = state.currency.base;
+                    selectors.currency.to.value = state.currency.target;
+                    fetchRates(state.currency.base);
+                });
+
+                selectors.currency.refresh.addEventListener('click', () => {
+                    fetchRates(state.currency.base);
+                });
+            };
+
+            // Password generator
+            const randomChar = {
+                lower: () => String.fromCharCode(Math.floor(Math.random() * 26) + 97),
+                upper: () => String.fromCharCode(Math.floor(Math.random() * 26) + 65),
+                number: () => String.fromCharCode(Math.floor(Math.random() * 10) + 48),
+                symbol: () => '`~!@#$%^&*()_+-={}[]|:;"<>,.?/'.charAt(Math.floor(Math.random() * 30))
+            };
+
+            const generatePassword = () => {
+                const length = parseInt(selectors.password.length.value, 10);
+                const options = ['lower', 'upper', 'number', 'symbol'].filter((type) => selectors.password[type].checked);
+
+                if (options.length === 0) {
+                    selectors.password.status.textContent = '至少选择一种字符类型';
+                    selectors.password.status.style.color = '#f87171';
+                    return;
+                }
+
+                let password = '';
+                while (password.length < length) {
+                    for (const type of options) {
+                        if (password.length < length) {
+                            password += randomChar[type]();
+                        }
+                    }
+                }
+
+                const shuffled = password
+                    .split('')
+                    .sort(() => Math.random() - 0.5)
+                    .join('');
+
+                selectors.password.value.textContent = shuffled;
+                selectors.password.status.textContent = `已生成 ${length} 位密码`;
+                selectors.password.status.style.color = 'var(--text-secondary)';
+            };
+
+            const copyToClipboard = async (text, onSuccess, onError) => {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    onSuccess();
+                } catch (error) {
+                    onError(error);
+                }
+            };
+
+            const initPasswordGenerator = () => {
+                selectors.password.length.addEventListener('input', (event) => {
+                    selectors.password.lengthValue.textContent = event.target.value;
+                });
+
+                selectors.password.generate.addEventListener('click', generatePassword);
+
+                selectors.password.copy.addEventListener('click', () => {
+                    const password = selectors.password.value.textContent;
+                    if (!password || password === '点击生成密码') return;
+                    copyToClipboard(
+                        password,
+                        () => {
+                            selectors.password.status.textContent = '已复制到剪贴板';
+                            selectors.password.status.style.color = 'var(--accent-green)';
+                        },
+                        (error) => {
+                            selectors.password.status.textContent = `复制失败：${error.message}`;
+                            selectors.password.status.style.color = '#f87171';
+                        }
+                    );
+                });
+            };
+
+            // Color picker
+            const hexToRgb = (hex) => {
+                const sanitized = hex.replace('#', '');
+                if (![3, 6].includes(sanitized.length)) return null;
+                const normalized = sanitized.length === 3
+                    ? sanitized.split('').map((c) => c + c).join('')
+                    : sanitized;
+                const bigint = parseInt(normalized, 16);
+                return {
+                    r: (bigint >> 16) & 255,
+                    g: (bigint >> 8) & 255,
+                    b: bigint & 255,
+                };
+            };
+
+            const rgbToHsl = ({ r, g, b }) => {
+                r /= 255; g /= 255; b /= 255;
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                let h; let s;
+                const l = (max + min) / 2;
+
+                if (max === min) {
+                    h = s = 0;
+                } else {
+                    const d = max - min;
+                    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                    switch (max) {
+                        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                        case g: h = (b - r) / d + 2; break;
+                        default: h = (r - g) / d + 4; break;
+                    }
+                    h /= 6;
+                }
+
+                return {
+                    h: Math.round(h * 360),
+                    s: Math.round(s * 100),
+                    l: Math.round(l * 100)
+                };
+            };
+
+            const updateColorValues = (hex) => {
+                const rgb = hexToRgb(hex);
+                if (!rgb) return;
+                const hsl = rgbToHsl(rgb);
+
+                selectors.color.preview.style.background = hex;
+                selectors.color.hexInput.value = hex;
+                selectors.color.hexValue.textContent = hex.toUpperCase();
+                selectors.color.rgbValue.textContent = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+                selectors.color.hslValue.textContent = `${hsl.h}°, ${hsl.s}%, ${hsl.l}%`;
+            };
+
+            const initColorPicker = () => {
+                updateColorValues(selectors.color.input.value);
+                selectors.color.input.addEventListener('input', (event) => {
+                    updateColorValues(event.target.value);
+                });
+
+                selectors.color.hexInput.addEventListener('input', (event) => {
+                    const value = event.target.value.startsWith('#') ? event.target.value : `#${event.target.value}`;
+                    if (/^#([0-9a-fA-F]{3}){1,2}$/.test(value)) {
+                        selectors.color.input.value = value;
+                        updateColorValues(value);
+                    }
+                });
+            };
+
+            // JSON formatter
+            const formatJSON = (spacing = 2) => {
+                try {
+                    const parsed = JSON.parse(selectors.json.input.value);
+                    selectors.json.output.textContent = JSON.stringify(parsed, null, spacing);
+                    selectors.json.error.textContent = '';
+                } catch (error) {
+                    selectors.json.error.textContent = `JSON 解析失败：${error.message}`;
+                }
+            };
+
+            const initJSONTool = () => {
+                selectors.json.format.addEventListener('click', () => formatJSON(2));
+                selectors.json.minify.addEventListener('click', () => formatJSON(0));
+                selectors.json.clear.addEventListener('click', () => {
+                    selectors.json.input.value = '';
+                    selectors.json.output.textContent = '结果会显示在这里';
+                    selectors.json.error.textContent = '';
+                });
+                selectors.json.copy.addEventListener('click', () => {
+                    const text = selectors.json.output.textContent;
+                    if (!text || text === '结果会显示在这里') return;
+                    copyToClipboard(
+                        text,
+                        () => {
+                            selectors.json.error.style.color = 'var(--accent-green)';
+                            selectors.json.error.textContent = '已复制到剪贴板';
+                        },
+                        (error) => {
+                            selectors.json.error.style.color = '#f87171';
+                            selectors.json.error.textContent = `复制失败：${error.message}`;
+                        }
+                    );
+                });
+            };
+
+            const init = () => {
+                initTabs();
+                initWeather();
+                renderCalculator();
+                bindCalculatorEvents();
+                initConverters();
+                initBMI();
+                initTimer();
+                initCurrencyConverter();
+                initPasswordGenerator();
+                initColorPicker();
+                initJSONTool();
+                updateCurrencyUI();
+            };
+
+            return { init };
+        })();
+
+        document.addEventListener('DOMContentLoaded', Toolkit.init);
     </script>
 </body>
 </html>
